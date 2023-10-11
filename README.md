@@ -1,3 +1,3 @@
 # Regression
 
-Link: https://Andreamg1.github.io/
+Link: https://Andreamg1.github.io/Regression/
