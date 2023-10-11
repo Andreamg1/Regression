@@ -24,5 +24,13 @@ var x = new float32Array(1,11)
   let outputData = outputMap.get('output1');
 
   let predictions = document.getElementById('predictions');
+  prediction.innerHTML = `<hr> Got an output tensor with values: <br/>
+  <table>
+  <tr><td> Rating of Wine Quality</td>
+  <td> ${outputData.data0.toFixed}</td>
+  </tr>
+  </table>
+
+  `;
   
 }
