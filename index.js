@@ -14,5 +14,10 @@ var x = new float32Array(1,11)
   document.getElementById('box10').value;
   document.getElementById('box11').value;
 
-  let tensorx = newonnx.Tensor(x,'float32',[1,11])
+  let tensorx = newonnx.Tensor(x,'float32',[1,11]);
+
+  let session = newonnx.InferenceSession();
+
+  await session.loadModel("./
+  
 }
