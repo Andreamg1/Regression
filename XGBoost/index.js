@@ -17,21 +17,23 @@ async function runExample() {
      x[9] = document.getElementById('box10').value;
      x[10] = document.getElementById('box11').value;
 
-    let tensorX = new onnx.Tensor(x, 'float32', [1, 11]);
+    let tensorX = new ort.Tensor('float32',x, [1, 11]);
+    let feeds={float_input : tensorX};
+    
 
-    let session = new onnx.InferenceSession();
+    let session = await ort.InferenceSession.create('xgboost_WineQuality_ort.onnx');
+    let result = session.run{feeds};
+    let outputData = result.variable.data;
+    outputData = parseFloat(outputData).toFixed(2);
+    
+    let predictions = document.getElementById('predictions');
 
-    await session.loadModel("./DLnet_WineData.onnx");
-    let outputMap = await session.run([tensorX]);
-    let outputData = outputMap.get('output1');
-
-   let predictions = document.getElementById('predictions');
 
   predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
    <table>
      <tr>
        <td>  Rating of Wine Quality  </td>
-       <td id="td0">  ${outputData.data[0].toFixed(2)}  </td>
+       <td id="td0">  ${outputData}  </td>
      </tr>
   </table>`;
     
